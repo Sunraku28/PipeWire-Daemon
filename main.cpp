@@ -16,6 +16,9 @@ struct AudioRules {
     float volume;
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 std::vector<AudioRules> get_rules() {
     std::vector<AudioRules> rules;
     std::ifstream file("config.json");
@@ -42,6 +45,8 @@ std::vector<AudioRules> get_rules() {
     return rules;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 int main() {
     std::cout << "***Booting Dynamic Audio Router Daemon***" << "\n";
     
@@ -61,7 +66,7 @@ int main() {
                 if(app_name.find(rule.app_name) != std::string::npos) {
 
                     if(routed_sessions[app_name] != node_id) {
-                        std::cout << "New Session Detected" << "App Name: " << app_name << "on Node Id: " << node_id << "\n";
+                        std::cout << "[New Session Detected] " << "App Name: " << app_name << " [on] Node Id: " << node_id << "\n";
 
                         std::string route_cmd = "pw-metadata " + node_id + " target.object " + rule.target_sink;
                         system(route_cmd.c_str());
