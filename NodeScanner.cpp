@@ -5,7 +5,7 @@
 #include <map>
 #include "NodeScanner.h"
 
-std::map<std::string,std::string> get_node_id() {
+std::map<std::string,std::string> get_active_streams() {
     std::map<std::string,std::string> streams;
 
     FILE* pipe = popen("wpctl status" ,"r");
@@ -13,7 +13,6 @@ std::map<std::string,std::string> get_node_id() {
 
     char buffer[1024];
     std::string line;
-    // std::string node_id = "";
 
     bool in_streams = false;
 
@@ -65,7 +64,7 @@ std::map<std::string,std::string> get_node_id() {
 }
 
 int main() {
-    std::map<std::string,std::string> active_nodes = get_node_id();
+    std::map<std::string,std::string> active_nodes = get_active_streams();
 
     if(active_nodes.empty()) {
         std::cout << "No active Nodes" << "\n";
