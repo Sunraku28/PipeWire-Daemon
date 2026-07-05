@@ -1,4 +1,5 @@
 #pragma once
 #include <string>
+#include <map>
 
-std::string get_node_id();
+std::map<std::string,std::string> get_node_id();

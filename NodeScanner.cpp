@@ -1,15 +1,19 @@
 #include <string>
 #include <cstdio>
 #include <iostream>
+#include <algorithm>
+#include <map>
 #include "NodeScanner.h"
 
-std::string get_node_id() {
+std::map<std::string,std::string> get_node_id() {
+    std::map<std::string,std::string> streams;
+
     FILE* pipe = popen("wpctl status" ,"r");
-    if (!pipe) return "";
+    if (!pipe) return streams;
 
     char buffer[1024];
-    std::string line = "";
-    std::string node_id = "";
+    std::string line;
+    // std::string node_id = "";
 
     bool in_streams = false;
 
@@ -26,26 +30,53 @@ std::string get_node_id() {
         }
 
         if(in_streams) {
-            if(line.find("spotify") != std::string::npos || line.find("Spotify") != std::string::npos) {
+            size_t non_space = line.find_first_not_of(" \t");
+            if(non_space != std::string::npos) {
+                std::string trimmed_line = line.substr(non_space);
+                
+                if(isdigit(trimmed_line[0])) {
+                    size_t dot_pos = trimmed_line.find(". ");
 
-                size_t first_digit = line.find_first_of("0123456789");
+                    if(dot_pos != std::string::npos) {
+                        std::string id = trimmed_line.substr(0,dot_pos);
+                        std::string name = trimmed_line.substr(dot_pos+2);
 
-                if (first_digit != std::string::npos) {
-                    size_t end_of_digit = line.find_first_not_of("0123456789", first_digit);
-                    node_id = line.substr(first_digit, end_of_digit - first_digit);
-                    break;
+                        size_t last_char = name.find_last_not_of(" \r\n");
+                        if(last_char != std::string::npos) {
+                            name = name.substr(0,last_char+1);
+                        }
+
+                        if(name.find("input_") == std::string::npos &&
+                           name.find("output_") == std::string::npos &&
+                           name.find("monitor_") == std::string::npos) {
+
+                            std::transform(name.begin(),name.end(),name.begin(), ::tolower);
+                            streams[name] = id; // ID saved in the map here
+                        }
+                    }
                 }
             }
         }
     }
 
     pclose(pipe);
-    // std::cout << node_id << "\n";
-    return node_id;
+    return streams;
 
 }
 
-// int main() {
-//     get_node_id();
-// }
+int main() {
+    std::map<std::string,std::string> active_nodes = get_node_id();
+
+    if(active_nodes.empty()) {
+        std::cout << "No active Nodes" << "\n";
+    }
+    else {
+        std::cout << active_nodes.size() << "\n";
+        for(const auto& pair : active_nodes) {
+            std::cout << "Name " << pair.first << " " << "ID " << pair.second << "\n";
+        }
+    }
+
+    return 0;
+}
 
