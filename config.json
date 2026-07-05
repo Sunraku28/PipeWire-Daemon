@@ -2,8 +2,8 @@
     "rules": [
         {
             "app_name": "spotify",
-            "target_sink": "Virtual Speaker",
-            "volume": 0.5
+            "target_sink": "Virtual_Speaker",
+            "volume": 0.3
         },
         {
             "app_name": "zen",
