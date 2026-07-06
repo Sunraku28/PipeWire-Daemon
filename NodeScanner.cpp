@@ -63,19 +63,19 @@ std::map<std::string,std::string> get_active_streams() {
 
 }
 
-int main() {
-    std::map<std::string,std::string> active_nodes = get_active_streams();
+// int main() {
+//     std::map<std::string,std::string> active_nodes = get_active_streams();
 
-    if(active_nodes.empty()) {
-        std::cout << "No active Nodes" << "\n";
-    }
-    else {
-        std::cout << active_nodes.size() << "\n";
-        for(const auto& pair : active_nodes) {
-            std::cout << "Name " << pair.first << " " << "ID " << pair.second << "\n";
-        }
-    }
+//     if(active_nodes.empty()) {
+//         std::cout << "No active Nodes" << "\n";
+//     }
+//     else {
+//         std::cout << active_nodes.size() << "\n";
+//         for(const auto& pair : active_nodes) {
+//             std::cout << "Name " << pair.first << " " << "ID " << pair.second << "\n";
+//         }
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 

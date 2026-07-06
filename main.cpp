@@ -6,48 +6,17 @@
 #include <chrono>
 #include <thread>
 #include "NodeScanner.h"
+#include "CLI_Handler.h"
+#include "AudioConfig.h"
 #include "json.hpp"
 
 using json = nlohmann::json;
 
-struct AudioRules {
-    std::string app_name;
-    std::string target_sink;
-    float volume;
-};
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-std::vector<AudioRules> get_rules() {
-    std::vector<AudioRules> rules;
-    std::ifstream file("config.json");
-
-    if(!file.is_open()) {
-        std::cerr << "[ERROR] config.json not found! Daemon Starting with no rules." << "\n";
-        return rules;
+int main(int argc, char* argv[]) {
+    if(argc > 1) {
+        return run_cli(argc, argv);
     }
-
-    json data = json::parse(file);
-    if(data.contains("rules")) {
-        for(const auto& r : data["rules"]) {
-            AudioRules rule;
-            rule.app_name = r.value("app_name", "");
-            rule.target_sink = r.value("target_sink", "");
-            rule.volume = r.value("volume", 1.0f);
-
-            if(!rule.app_name.empty() && !rule.target_sink.empty()) {
-                rules.push_back(rule);
-            }
-        }
-    }
-
-    return rules;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-int main() {
+    
     std::cout << "***Booting Dynamic Audio Router Daemon***" << "\n";
     
     std::vector<AudioRules> rules = get_rules();
