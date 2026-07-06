@@ -1,0 +1,13 @@
+[Unit]
+Description=Dynamic Pipewire Audio Router Daemon
+After=pipewire.service wireplumber.service
+Wants=pipewire.service wireplumber.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/audiorouter
+Restart=on-failure
+RestartSec=3
+
+[Install]
+Wantedby=default.target
