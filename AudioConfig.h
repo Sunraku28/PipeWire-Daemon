@@ -7,8 +7,7 @@
 #include "json.hpp"
 
 using json = nlohmann::json;
-
-const std::string CONFIG_FILE = "config.json";
+namespace fs = std::filesystem;
 
 struct AudioRules {
     std::string app_name;
@@ -16,8 +15,22 @@ struct AudioRules {
     float volume;
 };
 
+inline std::string get_config_path() {
+    const char* home = std::getenv("HOME");
+    std::string base_dir = (home != nullptr) ? std::string(home) : ".";
+    fs::path config_dir = fs::path(base_dir) / ".config" / "audiorouter";
+    
+    // Create ~/.config/audiorouter directory automatically if missing
+    if (!fs::exists(config_dir)) {
+        fs::create_directories(config_dir);
+    }
+    
+    return (config_dir / "config.json").string();
+}
+
 inline json load_raw_json() {
-    std::ifstream file(CONFIG_FILE);
+    std::string file_path = get_config_path();
+    std::ifstream file(file_path);
     if(!file.is_open()) {
         return json{{"rules", json::array()}};
     }
@@ -32,12 +45,13 @@ inline json load_raw_json() {
 // Save The JSON
 
 inline void save_raw_json(const json& data) {
-    std::ofstream file(CONFIG_FILE);
+    std::string file_path = get_config_path();
+    std::ofstream file(file_path);
     if(file.is_open()) {
         file << data.dump(4) << std::endl;
     }
     else {
-        std::cerr << "Unable to write " << CONFIG_FILE << "\n";
+        std::cerr << "Unable to write " << file_path << "\n";
     }
 }
 
