@@ -1,4 +1,4 @@
-# ynamic Audio Router (audiorouter)
+# Dynamic Audio Router (audiorouter)
 
 [![C++17](https://img.shields.io/badge/C++-17-blue.svg)](https://isocpp.org/)
 [![Linux](https://img.shields.io/badge/OS-Linux-orange.svg)]()
