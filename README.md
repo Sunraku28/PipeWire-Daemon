@@ -47,8 +47,8 @@ graph TD
     end
 
     %% Execution
-    Daemon --> |ID Match Detected!| Route[pw-metadata <br/> Route Audio]:::sys
-    Daemon --> |ID Match Detected!| Vol[wpctl <br/> Set Volume]:::sys 
+    Daemon --> |ID Match Detected| Route[pw-metadata <br/> Route Audio]:::sys
+    Daemon --> |ID Match Detected| Vol[wpctl <br/> Set Volume]:::sys 
 ```
 
 ## Installation
@@ -72,5 +72,5 @@ Clone the repository and use the provided Makefile to compile and install the bi
 
 ## Uninstallation
 
-To completely remove the binary, clear the systemd service, and stop the daemon safely
+To completely remove the binary, clear the systemd service, and stop the daemon safely.
 * sudo make uninstall
