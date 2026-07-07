@@ -49,7 +49,7 @@ graph TD
     %% Execution
     Daemon --> |ID Match Detected!| Route[pw-metadata <br/> Route Audio]:::sys
     Daemon --> |ID Match Detected!| Vol[wpctl <br/> Set Volume]:::sys 
-    ```
+```
 
 ## Installation
 ### Requirements
