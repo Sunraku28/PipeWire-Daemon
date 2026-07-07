@@ -49,3 +49,17 @@ graph TD
     %% Execution
     Daemon --> |ID Match Detected!| Route[pw-metadata <br/> Route Audio]:::sys
     Daemon --> |ID Match Detected!| Vol[wpctl <br/> Set Volume]:::sys
+
+## Installation
+### Requirements
+
+* A Linux Distribution running PipeWire and WirePlumber.
+* g++ compiler and make.
+
+## Build and Install
+Clone the repository and use the provided Makefile to compile and install the binary and system service globally
+
+**git clone [https://github.com/yourusername/audiorouter.git](https://github.com/yourusername/audiorouter.git)**
+**cd audiorouter**
+**make**
+**sudo make install**
