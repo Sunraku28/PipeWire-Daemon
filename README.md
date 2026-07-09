@@ -60,10 +60,10 @@ graph TD
 ## Build and Install
 Clone the repository and use the provided Makefile to compile and install the binary and system service globally
 
-* **git clone [https://github.com/yourusername/audiorouter.git](https://github.com/yourusername/audiorouter.git)**
-* **cd audiorouter**
-* **make**
-* **sudo make install**
+* `git clone [https://github.com/yourusername/audiorouter.git](https://github.com/yourusername/audiorouter.git)`
+* `cd audiorouter`
+* `make`
+* `sudo make install`
 
 ## How to use
 * **Run the daemon** : `audiorouter` 
@@ -89,4 +89,4 @@ If you want that the tool turns on when you login the system just make it a user
 ## Uninstallation
 
 To completely remove the binary, clear the systemd service, and stop the daemon safely.
-* sudo make uninstall
+* `sudo make uninstall`
