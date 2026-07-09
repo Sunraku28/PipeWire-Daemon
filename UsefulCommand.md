@@ -10,4 +10,4 @@ Here some commands of Pipewire and WirePlumber for the users of this tool.
 
 ## PipeWire
 Probably this will be the only commands you will require while using this tool.
-* **pw-metadata <stream_id> target.object <target_sink_id>** : To change the Output of a audio stream.(eg. Change spotify's output from speaker to headphone). Also this can done using "wpctl move" commands. 
+* **pw-metadata <stream_id> target.object <target_sink_id>** : To change the Output of a audio stream.(eg. Change spotify's output from speaker to headphone). Also this can done using "wpctl move" command. 
