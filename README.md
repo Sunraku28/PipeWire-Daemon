@@ -71,7 +71,7 @@ Clone the repository and use the provided Makefile to compile and install the bi
 * **List all configured application** : `audiorouter list`
 * **Delete a configuration** : `audiorouter remove <app_name>` 
 
-### Run it as a user service
+### Run it as a Background User Service(Recommended)
 If you want that the tool turns on when you login the system just make it a user service via these commands :-
 
 **->1. Ensure your personal systemd folder exists**
