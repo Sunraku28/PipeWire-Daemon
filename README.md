@@ -66,9 +66,25 @@ Clone the repository and use the provided Makefile to compile and install the bi
 * **sudo make install**
 
 ## How to use
-* **Add or Update a rule** : audiorouter set <app_name> <target_sink> <volume>(eg audiorouter set spotify speaker 0.5)
-* **List all configured application** : audiorouter list
-* **Delete a configuration** : audiorouter remove <app_name> 
+* **Run the daemon** : `audiorouter` 
+* **Add or Update a rule** : `audiorouter set <app_name> <target_sink> <volume>`(eg audiorouter set spotify speaker 0.5)
+* **List all configured application** : `audiorouter list`
+* **Delete a configuration** : `audiorouter remove <app_name>` 
+
+### Run it as a user service
+If you want that the tool turns on when you login the system just make it a user service via these commands :-
+
+**->1. Ensure your personal systemd folder exists**
+`mkdir -p ~/.config/systemd/user`
+
+**->2. Copy the service file to your personal folder**
+`cp audiorouter.service ~/.config/systemd/user/`
+
+**->3. Tell your systemd to refresh and look for new files**
+`systemctl --user daemon-reload`
+
+**->4. Enable and start the daemon immediately**
+`systemctl --user enable --now audiorouter.service`
 
 ## Uninstallation
 
