@@ -5,7 +5,7 @@ Here some commands of Pipewire and WirePlumber for the users of this tool.
 ## WirePlumber 
 * **wpctl status** : List all the clients, audio sinks, audio sources etc with there respective NODE ID and NAME.
 * **wpctl get-volume** : Display the current audio of the audio sink or audio stream.
-* **wpctl set-volume <stream_id> <volume>** : Set volume of that Audio Stream(for eg. spotify) to the required number(eg. 0.5->50%,0.3->30%).
+* **wpctl set-volume <stream_id> <volume_value>** : Set volume of that Audio Stream(for eg. spotify) to the required number(eg. 0.5->50%,0.3->30%).
 * **wpctl help** : If the above commands dosen't help out use this to list all the commands of WirePlumber Controls.
 
 ## PipeWire
