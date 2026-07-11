@@ -98,7 +98,7 @@ namespace {
             if((*it).value("app_name", "") == app) {
                 (*it)["volume"] = vol;
                 save_raw_json(data);
-                std::cout << "Volume " << app << " -> " << vol <<"\n";
+                std::cout << "Updated " << app << "Volume -> " << vol <<"\n";
                 return;
             }
             else {
