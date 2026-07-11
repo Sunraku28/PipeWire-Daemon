@@ -77,7 +77,7 @@ Clone the repository and use the provided Makefile to compile and install the bi
 > In terminal run this `wpctl status`. There should be a list of clients, streams, sources.
 > In the Audio->Sinks section there will be all the sinks that are currently active copy the exact name of the sink you need to set the rule for.
 > for example i will copy the exact sections shown in the image and place them at target_sink and app_name resepectively.
-> [!Alt Text](assets/wpctl_status.png)
+> ![Alt Text](assets/wpctl_status.png)
 
 > [!NOTE]
 > **How Volume Rules Work:**
