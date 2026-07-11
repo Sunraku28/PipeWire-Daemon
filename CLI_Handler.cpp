@@ -1,7 +1,9 @@
 #include "AudioConfig.h"
 #include "CLI_Handler.h"
+#include "TargetSink_CHECK.h"
 #include <string>
 #include <iostream>
+
 
 namespace {
     void print_help() {
@@ -62,6 +64,12 @@ namespace {
         save_raw_json(data);
         std::cout << "[SUCCESS] Rule " << (updated ? "updated" : "added") << " for '" << app << "'.\n";
         std::cout << " -> Target Sink: " << sink << " | Volume: " << vol << "\n";
+
+        if (!is_sink_currently_active(sink)) {
+            std::cout << "\033[1;33m[Warning]\033[0m Target sink '" << sink;
+            std::cout << "' is not currently active in PipeWire.\n";
+            std::cout << "          If this is a typo, please check your sink names!\n";
+        }
     }
 
     void handle_remove(const std::string& app) {
