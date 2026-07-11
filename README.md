@@ -73,6 +73,13 @@ Clone the repository and use the provided Makefile to compile and install the bi
 * **Update the volume of a configuration** : `audiorouter set-volume <app_name> <volume>`
 
 > [!NOTE]
+> **Where to get Target Sink Name?**
+> In terminal run this `wpctl status`. There should be a list of clients, streams, sources.
+> In the Audio->Sinks section there will be all the sinks that are currently active copy the exact name of the sink you need to set the rule for.
+> for example i will copy the exact sections shown in the image and place them at target_sink and app_name resepectively.
+> [!Alt Text](assets/wpctl_status.png)
+
+> [!NOTE]
 > **How Volume Rules Work:**
 > Volumes set by `audiorouter` apply directly to the application's individual audio stream, not your system's master volume slider. 
 > 
