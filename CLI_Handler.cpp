@@ -133,9 +133,17 @@ int run_cli(int argc, char* argv[]) {
             return 1;
         }
         std::string app = argv[2];
-        std::string sink = argv[3];
+        std::string vol_str = argv[argc-1];
+        std::string sink = "";
+
+        for(int i=3; i<argc-1; i++) {
+            sink += argv[i];
+            if(i < argc-2) {
+                sink += " ";
+            }
+        }
         try {
-            float vol = std::stof(argv[4]);
+            float vol = std::stof(vol_str);
             handle_set(app,sink,vol);
         }
         catch(...) {
