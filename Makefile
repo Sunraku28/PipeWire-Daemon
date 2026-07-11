@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 TARGET = audiorouter
-SRCS = main.cpp NodeScanner.cpp CLI_Handler.cpp
+SRCS = main.cpp NodeScanner.cpp CLI_Handler.cpp TargetSink_CHECK.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 PREFIX = /usr/local
