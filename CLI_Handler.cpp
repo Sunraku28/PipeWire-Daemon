@@ -6,12 +6,13 @@
 namespace {
     void print_help() {
         std::cout<<"Audio Router CLI Usage:\n";
-        std::cout<< " ./audiorouter                              Start background routing daemon\n";
-        std::cout<< " ./audiorouter list                         List all configuration audio rules\n";
-        std::cout<< " ./audiorouter set <app> <sink> <volume>    Add or update a routing rule\n";
-        std::cout<< " ./audiorouter remove <app>                 Delete a routing rule\n";
+        std::cout<< " audiorouter                              Start background routing daemon\n";
+        std::cout<< " audiorouter list                         List all configuration audio rules\n";
+        std::cout<< " audiorouter set <app> <sink> <volume>    Add or update a routing rule\n";
+        std::cout<< " audiorouter remove <app>                 Delete a routing rule\n";
+        std::cout<< " audiorouter set-volume <app> <vol>       Update the volume of required application in rules (Here 0.5 will represent 50"<<"% "<< "volume\n"; 
         std::cout<< "Example:\n";
-        std::cout<<" ./audiorouter set spotify speaker 0.5\n";
+        std::cout<<" audiorouter set spotify speaker 0.5\n";
     }
 
 
@@ -84,6 +85,29 @@ namespace {
         }
         std::cout << "[Warning] No rule found for " << app << "\n";
     }
+
+    void handle_set_vol(const std::string& app, float vol) {
+        json data = load_raw_json();
+        if(!data.contains("rules")) {
+            return;
+        }
+
+        auto& rules = data["rules"];
+
+        for(auto it=rules.begin(); it!=rules.end();) {
+            if((*it).value("app_name", "") == app) {
+                (*it)["volume"] = vol;
+                save_raw_json(data);
+                std::cout << "Volume " << app << " -> " << vol <<"\n";
+                return;
+            }
+            else {
+                ++it;
+            }
+        }
+        std::cout << "[Warning] No rule found for " << app << "\n";
+
+    } 
 }
 
 
@@ -97,7 +121,7 @@ int run_cli(int argc, char* argv[]) {
     else if(command == "set") {
         if(argc < 5) {
             std::cerr << "[ERROR] Missing arguments for 'set'.\n";
-            std::cerr << "Usage: ./audiorouter set <app_name> <target_sink> <volume>\n";
+            std::cerr << "Usage: audiorouter set <app_name> <target_sink> <volume>\n";
             return 1;
         }
         std::string app = argv[2];
@@ -114,10 +138,18 @@ int run_cli(int argc, char* argv[]) {
     }
     else if(command == "remove") {
         if(argc < 3) {
-            std::cerr << "[ERROR] Missing argument for 'remove'. Usage: ./audiorouter remove <app_name>\n";
+            std::cerr << "[ERROR] Missing argument for 'remove'. Usage: audiorouter remove <app_name>\n";
             return 1;
         }
         handle_remove(argv[2]);
+        return 0;
+    }
+    else if(command == "set-volume") {
+        if(argc < 4) {
+            std::cerr << "[ERROR] Missing argument for 'set_volume. Usage: audiorouter set-volume <app_name>\n";
+            return 1;
+        }
+        handle_set_vol(argv[2],std::stof(argv[3]));
         return 0;
     }
     else {
