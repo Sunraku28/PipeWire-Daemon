@@ -70,6 +70,14 @@ Clone the repository and use the provided Makefile to compile and install the bi
 * **Add or Update a rule** : `audiorouter set <app_name> <target_sink> <volume>`(eg audiorouter set spotify speaker 0.5)
 * **List all configured application** : `audiorouter list`
 * **Delete a configuration** : `audiorouter remove <app_name>` 
+* **Update the volume of a configuration** : `audiorouter set-volume <app_name> <volume>`
+
+> [!NOTE]
+> **How Volume Rules Work:**
+> Volumes set by `audiorouter` apply directly to the application's individual audio stream, not your system's master volume slider. 
+> 
+> The final audible volume is a multiplication of both: if your Master Speaker is set to `50%` (`0.5`) and you route Spotify to `0.4` (`40%`), Spotify will play at `20%` of your hardware's total capacity (`0.5 × 0.4`). This ensures your keyboard's master volume controls always remain the global ceiling for all audio!
+
 
 ### Run it as a Background User Service(Recommended)
 If you want that the tool turns on when you login the system just make it a user service via these commands :-
