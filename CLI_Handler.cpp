@@ -12,7 +12,7 @@ namespace {
         std::cout<< " audiorouter list                         List all configuration audio rules\n";
         std::cout<< " audiorouter set <app> <sink> <volume>    Add or update a routing rule\n";
         std::cout<< " audiorouter remove <app>                 Delete a routing rule\n";
-        std::cout<< " audiorouter set-volume <app> <vol>       Update the volume of required application in rules (Here 0.5 will represent 50"<<"% "<< "volume\n"; 
+        std::cout<< " audiorouter set-volume <app> <vol>       Update the volume of required application in rules (Here 0.5 will represent 50"<<"% "<< "volume)\n"; 
         std::cout<< "Example:\n";
         std::cout<<" audiorouter set spotify speaker 0.5\n";
     }
@@ -165,7 +165,7 @@ int run_cli(int argc, char* argv[]) {
             std::cerr << "[ERROR] Missing argument for 'set_volume. Usage: audiorouter set-volume <app_name>\n";
             return 1;
         }
-        handle_set_vol(argv[2],std::stof(argv[3]));
+        handle_set_vol(argv[2],std::stof(argv[argc-1]));
         return 0;
     }
     else {
