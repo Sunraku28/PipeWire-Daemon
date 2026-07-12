@@ -9,6 +9,7 @@
 #include "CLI_Handler.h"
 #include "AudioConfig.h"
 #include "json.hpp"
+#include "To_Lower.h"
 
 using json = nlohmann::json;
 
@@ -34,9 +35,13 @@ int main(int argc, char* argv[]) {
         for(const auto& stream : active_streams) {
             std::string app_name = stream.first;
             std::string node_id = stream.second;
+
+            std::string lower_app_name = to_lower(app_name);
             
             for(const auto& rule : rules) {
-                if(app_name.find(rule.app_name) != std::string::npos) {
+                std::string lower_rule_app_name = to_lower(rule.app_name);
+
+                if(lower_app_name.find(lower_rule_app_name) != std::string::npos) {
 
                     auto& current = active_states[app_name];
 

@@ -72,12 +72,18 @@ Clone the repository and use the provided Makefile to compile and install the bi
 * **Delete a configuration** : `audiorouter remove <app_name>` 
 * **Update the volume of a configuration** : `audiorouter set-volume <app_name> <volume>`
 
-> [!NOTE]
-> **Where to get Target Sink Name?**
-> In terminal run this `wpctl status`. There should be a list of clients, streams, sources.
-> In the Audio->Sinks section there will be all the sinks that are currently active copy the exact name of the sink you need to set the rule for.
-> for example i will copy the exact sections shown in the image and place them at target_sink and app_name resepectively.
-> ![Alt Text](assets/wpctl_status.png)
+> [!IMPORTANT]
+> **How to Find Your Target Sink Name:**
+> When setting a routing rule, PipeWire requires the internal system **`node.name`**, not the friendly display name.
+> 
+> To list the exact names of all your active audio sinks, run this command in your terminal:
+> ```bash
+> pactl list sinks short
+> ```
+> Copy the exact name from the second column (e.g., `alsa_output.pci-0000_00_1f.3.analog-stereo` or `Virtual_Speaker`) and pass it to `audiorouter`:
+> ```bash
+> audiorouter set spotify alsa_output.pci-0000_00_1f.3.analog-stereo 0.5
+> ```
 
 > [!NOTE]
 > **How Volume Rules Work:**

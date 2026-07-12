@@ -3,7 +3,7 @@
 #include "TargetSink_CHECK.h"
 #include <string>
 #include <iostream>
-
+#include "To_Lower.h"
 
 namespace {
     void print_help() {
@@ -132,7 +132,7 @@ int run_cli(int argc, char* argv[]) {
             std::cerr << "Usage: audiorouter set <app_name> <target_sink> <volume>\n";
             return 1;
         }
-        std::string app = argv[2];
+        std::string app = to_lower(argv[2]);
         std::string vol_str = argv[argc-1];
         std::string sink = "";
 
