@@ -84,6 +84,8 @@ Clone the repository and use the provided Makefile to compile and install the bi
 > ```bash
 > audiorouter set spotify alsa_output.pci-0000_00_1f.3.analog-stereo 0.5
 > ```
+> Example
+> ![Alt text](assets/Example_sink_list.png)
 
 > [!NOTE]
 > **How Volume Rules Work:**
