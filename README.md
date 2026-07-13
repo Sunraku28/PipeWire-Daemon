@@ -60,7 +60,7 @@ graph TD
 ## Build and Install
 Clone the repository and use the provided Makefile to compile and install the binary and system service globally
 
-* `git clone [https://github.com/yourusername/audiorouter.git](https://github.com/yourusername/audiorouter.git)`
+* `git clone https://github.com/Sunraku28/PipeWire-Daemon.git`
 * `cd audiorouter`
 * `make`
 * `sudo make install`
